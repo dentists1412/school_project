@@ -1,4 +1,33 @@
-
 <?php
-<?php$servername = "localhost";$username = "root";$password = "";$dbname = "divinestar_db";$conn = new mysqli($servername, $username, $password, $dbname);if ($conn->connect_error) {    die("Connection failed: " . $conn->connect_error);}if ($_SERVER["REQUEST_METHOD"] == "POST") {    $student_name = $_POST['student_name'];    $student_age = $_POST['student_age'];    $class_selection = $_POST['class_selection'];    $parent_name = $_POST['parent_name'];    $relationship = $_POST['relationship'];    $parent_email = $_POST['parent_email'];    $message = $_POST['message'];    $sql = "INSERT INTO admissions (student_name, student_age, class_selection, parent_name, relationship, parent_email, message)             VALUES ('$student_name', '$student_age', '$class_selection', '$parent_name', '$relationship', '$parent_email', '$message')";    if ($conn->query($sql) === TRUE) {        echo "Registration successful!";    } else {        echo "Error: " . $sql . "<br>" . $conn->error;    }}$conn->close();?>
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "divinestar_db";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $student_name = $_POST['student_name'];
+    $student_age = $_POST['student_age'];
+    $class_selection = $_POST['class_selection'];
+    $parent_name = $_POST['parent_name'];
+    $relationship = $_POST['relationship'];
+    $parent_email = $_POST['parent_email'];
+    $message = $_POST['message'];
+
+    // Updated column name here to match 'id_school_name' from your MariaDB structure
+    $sql = "INSERT INTO admissions (id_school_name, student_age, class_selection, parent_name, relationship, parent_email, message) 
+            VALUES ('$student_name', '$student_age', '$class_selection', '$parent_name', '$relationship', '$parent_email', '$message')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Registration successful!";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+}
+$conn->close();
 ?>
